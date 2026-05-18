@@ -1,13 +1,7 @@
-echo "# Elvorix-Mastering" >> README.md
+mkdir Elvorix
+cd Elvorix
 
-git init
-
-git add README.md
-
-git commit -m "first commit"
-
-git branch -M main
-
-git remote add origin https://github.com/Alhousainy23/Elvorix-Mastering.git
-
-git push -u origin main
+# عمل كل project كـ repo مستقل
+mkdir project-one && cd project-one && git init && cd ..
+mkdir project-two && cd project-two && git init && cd ..
+mkdir project-three && cd project-three && git init && cd ..
