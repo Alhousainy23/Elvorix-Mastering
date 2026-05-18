@@ -1,0 +1,307 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0}
+.level-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:0 0 10px;letter-spacing:.04em}
+.cards{display:grid;gap:10px;margin-bottom:24px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.card:hover{border-color:var(--color-border-primary);background:var(--color-background-secondary)}
+.card.active{border:1.5px solid var(--color-border-info);background:var(--color-background-info)}
+.card-head{display:flex;align-items:center;gap:10px}
+.icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.card-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.card-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:6px;font-weight:500}
+.detail-panel{background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:24px;display:none}
+.detail-panel.show{display:block}
+.detail-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
+.detail-row{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start}
+.detail-dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.detail-text{font-size:13px;color:var(--color-text-secondary);line-height:1.55}
+.detail-code{font-family:var(--font-mono);font-size:12px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:8px 10px;margin-top:8px;color:var(--color-text-primary);white-space:pre-wrap}
+.ask-btn{border:0.5px solid var(--color-border-secondary);background:transparent;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;color:var(--color-text-info);margin-top:10px;transition:background .15s}
+.ask-btn:hover{background:var(--color-background-info)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:4px 0 16px}
+.level-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+</style>
+
+<div class="wrap">
+
+<div style="margin-bottom:20px">
+  <div style="font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Statistics roadmap for AI</div>
+  <div style="font-size:13px;color:var(--color-text-secondary)">اضغط أي موضوع لتفاصيله ومثال الكود</div>
+</div>
+
+<!-- LEVEL 1 -->
+<div class="level-badge" style="background:var(--color-background-success);color:var(--color-text-success)">
+  <i class="ti ti-circle-1" aria-hidden="true"></i> المستوى الأول — الأساسيات
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+
+  <div class="card" onclick="toggle('desc')">
+    <div class="card-head">
+      <div class="icon" style="background:#EAF3DE">📊</div>
+      <div><div class="card-name">Descriptive Stats</div><div class="card-sub">وصف البيانات</div></div>
+    </div>
+    <span class="badge" style="background:#EAF3DE;color:#3B6D11">Mean · Std · Variance</span>
+  </div>
+
+  <div class="card" onclick="toggle('prob')">
+    <div class="card-head">
+      <div class="icon" style="background:#E6F1FB">🎲</div>
+      <div><div class="card-name">Probability</div><div class="card-sub">الاحتمالات</div></div>
+    </div>
+    <span class="badge" style="background:#E6F1FB;color:#185FA5">P(A) · Bayes · Distributions</span>
+  </div>
+
+  <div class="card" onclick="toggle('dist')">
+    <div class="card-head">
+      <div class="icon" style="background:#FAEEDA">📈</div>
+      <div><div class="card-name">Distributions</div><div class="card-sub">توزيعات البيانات</div></div>
+    </div>
+    <span class="badge" style="background:#FAEEDA;color:#854F0B">Normal · Bernoulli · Softmax</span>
+  </div>
+
+</div>
+
+<div id="desc" class="detail-panel">
+  <div class="detail-title">Descriptive Statistics — ليه مهمة في AI؟</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#3B6D11"></div><div class="detail-text"><strong>Mean (المتوسط)</strong>: بيحسب متوسط الـ loss أو accuracy على الـ batch</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#3B6D11"></div><div class="detail-text"><strong>Variance / Std</strong>: بيكشف إذا كان الـ model بيتذبذب (unstable training)</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#3B6D11"></div><div class="detail-text"><strong>Median</strong>: أقل تأثرًا بالـ outliers — مهم في تنظيف البيانات</div></div>
+  <div class="detail-code">import numpy as np
+
+data = [2, 4, 4, 4, 5, 5, 7, 9]
+print("Mean    :", np.mean(data))      # 5.0
+print("Std     :", np.std(data))       # 1.85
+print("Variance:", np.var(data))       # 3.43
+print("Median  :", np.median(data))    # 4.5</div>
+  <button class="ask-btn" onclick="sendPrompt('وضح لي Descriptive Statistics بمثال عملي في تدريب Neural Network')">اشرح بمثال Neural Network ↗</button>
+</div>
+
+<div id="prob" class="detail-panel">
+  <div class="detail-title">Probability — الاحتمالات في AI</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#185FA5"></div><div class="detail-text"><strong>Bayes' Theorem</strong>: أساس Naive Bayes classifier وكمان Bayesian Neural Networks</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#185FA5"></div><div class="detail-text"><strong>Conditional Probability P(A|B)</strong>: جوهر كل خطوة في الـ deep learning</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#185FA5"></div><div class="detail-text"><strong>Joint Probability</strong>: مستخدمة في Generative Models (VAE, GAN)</div></div>
+  <div class="detail-code">from fractions import Fraction
+
+# Bayes: P(cat|meows) = P(meows|cat) * P(cat) / P(meows)
+P_cat     = 0.4    # prior
+P_meow_cat= 0.9    # likelihood
+P_meow    = 0.5    # evidence
+
+P_cat_meow = (P_meow_cat * P_cat) / P_meow
+print(f"P(cat | meows) = {P_cat_meow:.2f}")  # 0.72</div>
+  <button class="ask-btn" onclick="sendPrompt('وضح Bayes Theorem وكيف يُستخدم في Naive Bayes Classifier بكود Python')">Bayes في Classifier ↗</button>
+</div>
+
+<div id="dist" class="detail-panel">
+  <div class="detail-title">Distributions — التوزيعات المهمة في AI</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Normal / Gaussian</strong>: تهيئة الـ weights، Batch Normalization</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Bernoulli</strong>: Binary classification (0 أو 1)</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Softmax (Categorical)</strong>: آخر طبقة في الـ multi-class classifier</div></div>
+  <div class="detail-code">import numpy as np
+
+# Softmax — بيحول scores لـ probabilities
+scores = np.array([2.0, 1.0, 0.1])
+exp    = np.exp(scores - np.max(scores))  # stable
+probs  = exp / exp.sum()
+print("Softmax:", np.round(probs, 3))
+# [0.659, 0.242, 0.099] — مجموعها = 1.0</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح Normal Distribution وكيف تُستخدم في تهيئة Weights في Neural Networks')">Normal Distribution ↗</button>
+</div>
+
+<div class="divider"></div>
+
+<!-- LEVEL 2 -->
+<div class="level-badge" style="background:var(--color-background-info);color:var(--color-text-info)">
+  <i class="ti ti-circle-2" aria-hidden="true"></i> المستوى الثاني — ML Core
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+
+  <div class="card" onclick="toggle('linreg')">
+    <div class="card-head">
+      <div class="icon" style="background:#EEEDFE">📉</div>
+      <div><div class="card-name">Linear Algebra</div><div class="card-sub">الجبر الخطي</div></div>
+    </div>
+    <span class="badge" style="background:#EEEDFE;color:#534AB7">Matrices · Dot product · SVD</span>
+  </div>
+
+  <div class="card" onclick="toggle('hypo')">
+    <div class="card-head">
+      <div class="icon" style="background:#FAECE7">🧪</div>
+      <div><div class="card-name">Hypothesis Testing</div><div class="card-sub">اختبار الفرضيات</div></div>
+    </div>
+    <span class="badge" style="background:#FAECE7;color:#993C1D">p-value · t-test · A/B</span>
+  </div>
+
+  <div class="card" onclick="toggle('info')">
+    <div class="card-head">
+      <div class="icon" style="background:#E1F5EE">🔢</div>
+      <div><div class="card-name">Information Theory</div><div class="card-sub">نظرية المعلومات</div></div>
+    </div>
+    <span class="badge" style="background:#E1F5EE;color:#0F6E56">Entropy · Cross-Entropy · KL</span>
+  </div>
+
+</div>
+
+<div id="linreg" class="detail-panel">
+  <div class="detail-title">Linear Algebra — الجبر الخطي في AI</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>Matrix Multiplication</strong>: كل forward pass في الـ Neural Network هو ضرب matrices</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>Dot Product</strong>: أساس Attention mechanism في Transformers</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>SVD / Eigenvalues</strong>: مستخدم في PCA وضغط الـ models</div></div>
+  <div class="detail-code">import numpy as np
+
+# Forward pass بسيط
+X = np.array([[1,2],[3,4]])   # input
+W = np.array([[0.5,-1],[2,0.1]])  # weights
+b = np.array([0.1, 0.2])     # bias
+
+output = X @ W + b  # matrix multiply
+print("Output:\n", output)</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح Linear Algebra بمثال على Attention mechanism في Transformers')">Attention بالجبر ↗</button>
+</div>
+
+<div id="hypo" class="detail-panel">
+  <div class="detail-title">Hypothesis Testing — في AI بستخدمها فين؟</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#993C1D"></div><div class="detail-text"><strong>A/B Testing</strong>: مقارنة نموذجين — هل الـ accuracy فرقها significant؟</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#993C1D"></div><div class="detail-text"><strong>p-value</strong>: إذا p &lt; 0.05 الفرق حقيقي مش عشوائي</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#993C1D"></div><div class="detail-text"><strong>Confidence Interval</strong>: بيحدد مدى الثقة في الـ model predictions</div></div>
+  <div class="detail-code">from scipy import stats
+import numpy as np
+
+model_A = np.array([0.82,0.85,0.80,0.83,0.84])
+model_B = np.array([0.88,0.90,0.87,0.91,0.89])
+
+t_stat, p_value = stats.ttest_ind(model_A, model_B)
+print(f"p-value = {p_value:.4f}")
+if p_value < 0.05:
+    print("Model B أفضل بشكل معنوي ✓")</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح A/B Testing لمقارنة نموذجين AI مع كود Python')">A/B Testing ↗</button>
+</div>
+
+<div id="info" class="detail-panel">
+  <div class="detail-title">Information Theory — قلب الـ Deep Learning</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#0F6E56"></div><div class="detail-text"><strong>Cross-Entropy Loss</strong>: أشهر loss function في Classification — كل model بتدربه بيستخدمها</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#0F6E56"></div><div class="detail-text"><strong>Entropy</strong>: بيقيس عشوائية البيانات — مستخدم في Decision Trees</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#0F6E56"></div><div class="detail-text"><strong>KL Divergence</strong>: بيقيس الفرق بين توزيعين — أساس الـ VAE</div></div>
+  <div class="detail-code">import numpy as np
+
+# Cross-Entropy Loss
+y_true = np.array([1, 0, 0])       # الإجابة الصح (one-hot)
+y_pred = np.array([0.7, 0.2, 0.1]) # توقع الـ model
+
+loss = -np.sum(y_true * np.log(y_pred + 1e-9))
+print(f"Cross-Entropy Loss = {loss:.4f}")  # 0.3567</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح Cross-Entropy Loss وكيف يختلف عن MSE في تدريب Neural Networks')">Cross-Entropy ↗</button>
+</div>
+
+<div class="divider"></div>
+
+<!-- LEVEL 3 -->
+<div class="level-badge" style="background:var(--color-background-warning);color:var(--color-text-warning)">
+  <i class="ti ti-circle-3" aria-hidden="true"></i> المستوى الثالث — Deep Learning
+</div>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+
+  <div class="card" onclick="toggle('optim')">
+    <div class="card-head">
+      <div class="icon" style="background:#FAEEDA">⚡</div>
+      <div><div class="card-name">Optimization</div><div class="card-sub">تحسين الـ model</div></div>
+    </div>
+    <span class="badge" style="background:#FAEEDA;color:#854F0B">Gradient · Adam · LR Schedule</span>
+  </div>
+
+  <div class="card" onclick="toggle('reg')">
+    <div class="card-head">
+      <div class="icon" style="background:#FCEBEB">🛡️</div>
+      <div><div class="card-name">Regularization</div><div class="card-sub">منع الـ Overfitting</div></div>
+    </div>
+    <span class="badge" style="background:#FCEBEB;color:#A32D2D">L1 · L2 · Dropout · Early Stop</span>
+  </div>
+
+  <div class="card" onclick="toggle('eval')">
+    <div class="card-head">
+      <div class="icon" style="background:#EEEDFE">🎯</div>
+      <div><div class="card-name">Evaluation Metrics</div><div class="card-sub">قياس الأداء</div></div>
+    </div>
+    <span class="badge" style="background:#EEEDFE;color:#534AB7">Precision · Recall · ROC · AUC</span>
+  </div>
+
+</div>
+
+<div id="optim" class="detail-panel">
+  <div class="detail-title">Optimization — الرياضيات وراء التدريب</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Gradient Descent</strong>: المشتقة بتقولك اتجاه التحسين — w = w - lr × ∂Loss/∂w</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Adam Optimizer</strong>: بيجمع Momentum + Adaptive LR — الأشهر في Deep Learning</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#854F0B"></div><div class="detail-text"><strong>Learning Rate</strong>: أهم hyperparameter — كبير = unstable، صغير = بطيء</div></div>
+  <div class="detail-code">import numpy as np
+
+# Gradient Descent يدوي
+def loss(w): return (w - 3)**2   # minimum عند w=3
+def grad(w): return 2*(w - 3)
+
+w, lr = 0.0, 0.1
+for step in range(10):
+    w = w - lr * grad(w)
+    print(f"Step {step+1}: w={w:.3f}, loss={loss(w):.4f}")</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح Adam Optimizer وكيف يختلف عن SGD في تدريب Neural Networks')">Adam vs SGD ↗</button>
+</div>
+
+<div id="reg" class="detail-panel">
+  <div class="detail-title">Regularization — علاج الـ Overfitting</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#A32D2D"></div><div class="detail-text"><strong>L2 (Ridge)</strong>: بيضيف عقوبة على الـ weights الكبيرة — الأشيع في الـ Neural Networks</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#A32D2D"></div><div class="detail-text"><strong>Dropout</strong>: بيطفّي neurons عشوائياً أثناء التدريب — بيمنع الاعتماد المفرط</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#A32D2D"></div><div class="detail-text"><strong>Early Stopping</strong>: بيوقف التدريب لما الـ validation loss يبدأ يزيد</div></div>
+  <div class="detail-code">import torch.nn as nn
+
+class RegularizedNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(128, 64)
+        self.drop = nn.Dropout(p=0.3)  # 30% neurons off
+        self.fc2 = nn.Linear(64, 10)
+
+    def forward(self, x):
+        x = self.fc1(x).relu()
+        x = self.drop(x)   # Dropout هنا
+        return self.fc2(x)
+
+# L2 Regularization عبر weight_decay في الـ optimizer
+# optimizer = torch.optim.Adam(model.parameters(), weight_decay=1e-4)</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح الفرق بين L1 و L2 Regularization بمثال عملي')">L1 vs L2 ↗</button>
+</div>
+
+<div id="eval" class="detail-panel">
+  <div class="detail-title">Evaluation Metrics — إزاي تحكم على الـ Model</div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>Precision</strong>: من اللي قلت إنه positive، كام صح؟ — مهم لما False Positive غالي</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>Recall</strong>: من الـ positive الحقيقيين، قدرت تمسك كام؟ — مهم في medical diagnosis</div></div>
+  <div class="detail-row"><div class="detail-dot" style="background:#534AB7"></div><div class="detail-text"><strong>AUC-ROC</strong>: بيقيس الـ model على كل الـ thresholds — 0.5 = random، 1.0 = perfect</div></div>
+  <div class="detail-code">from sklearn.metrics import classification_report, roc_auc_score
+
+y_true = [0,1,1,0,1,0,1,1]
+y_pred = [0,1,0,0,1,0,1,1]
+y_prob = [.1,.9,.4,.2,.8,.3,.7,.95]
+
+print(classification_report(y_true, y_pred))
+print(f"AUC-ROC = {roc_auc_score(y_true, y_prob):.3f}")</div>
+  <button class="ask-btn" onclick="sendPrompt('اشرح Confusion Matrix و Precision و Recall و F1-Score بمثال عملي في Python')">Confusion Matrix ↗</button>
+</div>
+
+</div>
+<script>
+function toggle(id){
+  const el=document.getElementById(id);
+  const isOpen=el.classList.contains('show');
+  document.querySelectorAll('.detail-panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+  if(!isOpen){
+    el.classList.add('show');
+    el.previousElementSibling && el.previousElementSibling.classList.add('active');
+    // find the card that triggered
+    event.currentTarget.classList.add('active');
+  }
+}
+</script>
